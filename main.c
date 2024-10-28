@@ -252,7 +252,8 @@ void calcularMedia(Aluno *aluno) {
 }
 
 
-// Função para listar todos os alunos
+
+// Função para listar todos os alunoss
 void listarAlunos(Aluno *alunos, int quantidade) {
   if (quantidade == 0) {
     printf("Nenhum aluno cadastrado.\n");
