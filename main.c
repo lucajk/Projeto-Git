@@ -35,7 +35,6 @@ int buscarIndiceAluno(Aluno *alunos, int quantidade, int matricula);
 int validarNota(float nota);
 int validarNotaInput(char *input);
 
-
 int main() {
   Aluno alunos[MAX_ALUNOS];
   int quantidade = 0;
