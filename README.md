@@ -2,6 +2,9 @@
 
 Este projeto é um sistema simples de gerenciamento de alunos, permitindo a adição, edição, remoção e consulta de informações de alunos, como notas, matrícula e faltas. O sistema também gera relatórios de alunos aprovados e reprovados e salva os dados em arquivos de texto e binário.
 
+## Explicação do Código
+O código é organizado em uma estrutura simples que utiliza um struct para armazenar as informações dos alunos, como nome, matrícula, notas, média e faltas. O programa é interativo, permitindo que o usuário escolha entre várias operações para gerenciar os alunos. As funções implementadas incluem adicionar, editar, remover e listar alunos, bem como calcular médias e gerar relatórios de aprovação. Além disso, os dados são salvos em arquivos de texto e binários para persistência.
+
 ## Funcionalidades
 
 - **Adicionar Aluno**: Permite a adição de um novo aluno com nome, matrícula, notas e faltas.
@@ -28,8 +31,12 @@ O código é escrito em C e utiliza uma estrutura `Aluno` para armazenar as info
 - `carregarDadosBinario()`: Carrega dados de um arquivo binário.
 - `validarNota()`: Valida se a nota está dentro do intervalo permitido.
 
+## Participantes do Grupo
+- Nome: Luca Juraski | RA: 521240127
+- Nome: Gabriel Cantorani | RA: 52124006-9
+
 ## Como Usar
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/seurepositorio.git
+   git clone [https://github.com/lucajk/Projeto-Git/tree/main]
