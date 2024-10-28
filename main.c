@@ -269,3 +269,41 @@ void listarAlunos(Aluno *alunos, int quantidade) {
     printf("Faltas: %d\n\n", alunos[i].faltas);
   }
 }
+
+// Função para buscar um aluno pela matrícula
+void buscarAluno(Aluno *alunos, int quantidade, int matricula) {
+  int indice = buscarIndiceAluno(alunos, quantidade, matricula);
+  if (indice == -1) {
+    printf("Aluno não encontrado.\n");
+    return;
+  }
+
+  Aluno *aluno = &alunos[indice];
+  printf("Aluno encontrado:\n");
+  printf("Nome: %s\n", aluno->nome);
+  printf("Matrícula: %d\n", aluno->matricula);
+  printf("Notas: %.2f, %.2f, %.2f\n", aluno->notas[0], aluno->notas[1],
+         aluno->notas[2]);
+  printf("Média: %.2f\n", aluno->media);
+  printf("Faltas: %d\n", aluno->faltas);
+}
+
+// Função para listar alunos aprovados e reprovados
+void listarAprovadosReprovados(Aluno *alunos, int quantidade) {
+  printf("\nAlunos Aprovados:\n");
+  for (int i = 0; i < quantidade; i++) {
+    if (alunos[i].media >= MEDIA_APROVACAO &&
+        alunos[i].faltas <= FALTAS_MAXIMAS) {
+      printf("Nome: %s, Matrícula: %d\n", alunos[i].nome, alunos[i].matricula);
+    }
+  }
+
+  printf("\nAlunos Reprovados:\n");
+  for (int i = 0; i < quantidade; i++) {
+    if (alunos[i].media < MEDIA_APROVACAO ||
+        alunos[i].faltas > FALTAS_MAXIMAS) {
+      printf("Nome: %s, Matrícula: %d\n", alunos[i].nome, alunos[i].matricula);
+    }
+  }
+}
+
