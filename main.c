@@ -34,3 +34,62 @@ void carregarDadosBinario(Aluno *alunos, int *quantidade);
 int buscarIndiceAluno(Aluno *alunos, int quantidade, int matricula);
 int validarNota(float nota);
 int validarNotaInput(char *input);
+
+
+int main() {
+  Aluno alunos[MAX_ALUNOS];
+  int quantidade = 0;
+  int opcao, matricula;
+
+  carregarDados(alunos, &quantidade);
+
+  do {
+    printf("\nSistema de Gerenciamento de Alunos\n");
+    printf("1. Adicionar Aluno\n");
+    printf("2. Editar Aluno\n");
+    printf("3. Remover Aluno\n");
+    printf("4. Listar Alunos\n");
+    printf("5. Buscar Aluno\n");
+    printf("6. Relatório de Aprovados/Reprovados\n");
+    printf("7. Salvar e Sair\n");
+    printf("Escolha uma opção: ");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+    case 1:
+      adicionarAluno(alunos, &quantidade);
+      break;
+    case 2:
+      editarAluno(alunos, quantidade);
+      break;
+    case 3:
+      removerAluno(alunos, &quantidade);
+      break;
+    case 4:
+      listarAlunos(alunos, quantidade);
+      break;
+    case 5:
+      printf("Digite a matrícula do aluno: ");
+      if (scanf("%d", &matricula) != 1) {
+        printf("A matrícula deve conter apenas números.\n");
+        while (getchar() != '\n')
+          ;
+        break;
+      }
+      buscarAluno(alunos, quantidade, matricula);
+      break;
+    case 6:
+      listarAprovadosReprovados(alunos, quantidade);
+      break;
+    case 7:
+      salvarDados(alunos, quantidade);
+      salvarDadosBinario(alunos, quantidade);
+      printf("Dados salvos em texto e binário. Saindo...\n");
+      break;
+    default:
+      printf("Opção inválida!\n");
+    }
+  } while (opcao != 7);
+
+  return 0;
+}
