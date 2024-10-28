@@ -288,6 +288,7 @@ void buscarAluno(Aluno *alunos, int quantidade, int matricula) {
   printf("Faltas: %d\n", aluno->faltas);
 }
 
+
 // Função para listar alunos aprovados e reprovados
 void listarAprovadosReprovados(Aluno *alunos, int quantidade) {
   printf("\nAlunos Aprovados:\n");
