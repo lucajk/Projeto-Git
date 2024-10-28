@@ -92,3 +92,52 @@ int main() {
 
   return 0;
 }
+
+void adicionarAluno(Aluno *alunos, int *quantidade) {
+  if (*quantidade >= MAX_ALUNOS) {
+    printf("Limite de alunos atingido!\n");
+    return;
+  }
+
+  Aluno novoAluno;
+  char notaStr[10];
+
+  printf("Matrícula do aluno: ");
+  scanf("%d", &novoAluno.matricula);
+
+  if (buscarIndiceAluno(alunos, *quantidade, novoAluno.matricula) != -1) {
+    printf("Matrícula já existente! Aluno não foi adicionado.\n");
+    return;
+  }
+
+  printf("Nome do aluno: ");
+  scanf(" %[^\n]", novoAluno.nome);
+
+  for (int i = 0; i < 3; i++) {
+    int notaValida = 0;
+    do {
+      printf("Nota %d: ", i + 1);
+      scanf("%s", notaStr);
+
+      if (validarNotaInput(notaStr)) {
+        novoAluno.notas[i] = atof(notaStr);
+        if (validarNota(novoAluno.notas[i])) {
+          notaValida = 1;
+        } else {
+          printf("Nota inválida! Digite uma nota entre %.1f e %.1f.\n",
+                 NOTA_MINIMA, NOTA_MAXIMA);
+        }
+      } else {
+        printf("A nota deve conter apenas números. Tente novamente.\n");
+      }
+    } while (!notaValida);
+  }
+
+  printf("Quantidade de faltas: ");
+  scanf("%d", &novoAluno.faltas);
+
+  calcularMedia(&novoAluno);
+  alunos[*quantidade] = novoAluno;
+  (*quantidade)++;
+  printf("Aluno adicionado com sucesso!\n");
+}
