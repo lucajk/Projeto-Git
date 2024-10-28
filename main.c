@@ -353,3 +353,57 @@ void carregarDados(Aluno *alunos, int *quantidade) {
   fclose(arquivo);
   printf("Dados carregados do arquivo texto com sucesso!\n");
 }
+
+// Função para salvar dados dos alunos em arquivo binário
+void salvarDadosBinario(Aluno *alunos, int quantidade) {
+  FILE *arquivo = fopen(ARQUIVO_BINARIO, "wb");
+  if (arquivo == NULL) {
+    printf("Erro ao abrir o arquivo para salvar os dados em binário.\n");
+    return;
+  }
+
+  // Salva a quantidade de alunos primeiro
+  if (fwrite(&quantidade, sizeof(int), 1, arquivo) != 1) {
+    printf("Erro ao salvar a quantidade de alunos no arquivo binário.\n");
+    fclose(arquivo);
+    return;
+  }
+
+  // Salva todos os alunos
+  if (fwrite(alunos, sizeof(Aluno), quantidade, arquivo) != quantidade) {
+    printf("Erro ao salvar os dados dos alunos no arquivo binário.\n");
+    fclose(arquivo);
+    return;
+  }
+
+  fclose(arquivo);
+  printf("Dados salvos no arquivo binário com sucesso.\n");
+}
+
+// Função para carregar dados dos alunos de arquivo binário
+void carregarDadosBinario(Aluno *alunos, int *quantidade) {
+  FILE *arquivo = fopen(ARQUIVO_BINARIO, "rb");
+  if (arquivo == NULL) {
+    printf("Nenhum arquivo binário encontrado. Criando novo...\n");
+    *quantidade = 0;
+    return;
+  }
+
+  // Lê a quantidade de alunos primeiro
+  if (fread(quantidade, sizeof(int), 1, arquivo) != 1) {
+    printf("Erro ao ler a quantidade de alunos do arquivo binário.\n");
+    fclose(arquivo);
+    return;
+  }
+
+  // Lê os dados dos alunos
+  if (fread(alunos, sizeof(Aluno), *quantidade, arquivo) != *quantidade) {
+    printf("Erro ao ler os dados dos alunos do arquivo binário.\n");
+    fclose(arquivo);
+    *quantidade = 0; // Define quantidade como zero em caso de falha
+    return;
+  }
+
+  fclose(arquivo);
+  printf("Dados carregados do arquivo binário com sucesso.\n");
+}
