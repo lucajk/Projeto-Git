@@ -160,3 +160,58 @@ int validarMatricula(char *input) {
   }
   return 1; // Se todos os caracteres forem dígitos, retorna 1 (verdadeiro)
 }
+// Função para editar um aluno
+void editarAluno(Aluno *alunos, int quantidade) {
+  int matricula, indice;
+
+  printf("Digite a matrícula do aluno para editar: ");
+  char matriculaStr[10];
+  scanf("%s", matriculaStr);
+
+  if (!validarMatricula(matriculaStr)) {
+      printf("A matrícula deve conter apenas números.\n");
+      return;
+  }
+
+  matricula = atoi(matriculaStr); // Converte a string para inteiro
+
+  indice = buscarIndiceAluno(alunos, quantidade, matricula);
+  if (indice == -1) {
+      printf("Aluno não encontrado.\n");
+      return;
+  }
+
+  Aluno *aluno = &alunos[indice];
+  printf("Editando aluno: %s\n", aluno->nome);
+
+  printf("Novo nome do aluno: ");
+  scanf(" %[^\n]", aluno->nome);
+
+  for (int i = 0; i < 3; i++) {
+      char notaStr[10];
+      int notaValida = 0;
+      do {
+          printf("Nova Nota %d: ", i + 1);
+          scanf("%s", notaStr);
+
+          if (validarNotaInput(notaStr)) {
+              aluno->notas[i] = atof(notaStr);
+              if (validarNota(aluno->notas[i])) {
+                  notaValida = 1;
+              } else {
+                  printf("Nota inválida! Digite uma nota entre %.1f e %.1f.\n",
+                         NOTA_MINIMA, NOTA_MAXIMA);
+              }
+          } else {
+              printf("A nota deve conter apenas números. Tente novamente.\n");
+          }
+      } while (!notaValida);
+  }
+
+  printf("Nova quantidade de faltas: ");
+  scanf("%d", &aluno->faltas);
+
+  calcularMedia(aluno);
+  printf("Aluno editado com sucesso!\n");
+}
+
