@@ -407,3 +407,28 @@ void carregarDadosBinario(Aluno *alunos, int *quantidade) {
   fclose(arquivo);
   printf("Dados carregados do arquivo binário com sucesso.\n");
 }
+
+// Função para buscar o índice do aluno no array pela matrícula
+int buscarIndiceAluno(Aluno *alunos, int quantidade, int matricula) {
+  for (int i = 0; i < quantidade; i++) {
+    if (alunos[i].matricula == matricula) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// Função para validar se uma nota está dentro do intervalo permitido
+int validarNota(float nota) {
+  return (nota >= NOTA_MINIMA && nota <= NOTA_MAXIMA);
+}
+
+// Função para verificar se a entrada de nota é um número válido
+int validarNotaInput(char *input) {
+  for (int i = 0; input[i] != '\0'; i++) {
+    if (!isdigit(input[i]) && input[i] != '.') {
+      return 0;
+    }
+  }
+  return 1;
+}
