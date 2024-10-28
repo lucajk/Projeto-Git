@@ -380,6 +380,7 @@ void salvarDadosBinario(Aluno *alunos, int quantidade) {
   printf("Dados salvos no arquivo binário com sucesso.\n");
 }
 
+
 // Função para carregar dados dos alunos de arquivo binário
 void carregarDadosBinario(Aluno *alunos, int *quantidade) {
   FILE *arquivo = fopen(ARQUIVO_BINARIO, "rb");
