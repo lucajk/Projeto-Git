@@ -40,3 +40,9 @@ O código é escrito em C e utiliza uma estrutura `Aluno` para armazenar as info
 1. Clone o repositório:
    ```bash
    git clone [https://github.com/lucajk/Projeto-Git/tree/main]
+
+## Compile o código:
+   gcc -o gerenciamento_alunos main.c
+
+## Execute o código
+   ./gerenciamento_alunos
