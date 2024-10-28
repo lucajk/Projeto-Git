@@ -330,6 +330,7 @@ void salvarDados(Aluno *alunos, int quantidade) {
   printf("Dados salvos no arquivo texto com sucesso.\n");
 }
 
+
 // Função para carregar dados dos alunos do arquivo de texto
 void carregarDados(Aluno *alunos, int *quantidade) {
   FILE *arquivo = fopen(ARQUIVO, "r");
