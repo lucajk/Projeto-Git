@@ -215,3 +215,37 @@ void editarAluno(Aluno *alunos, int quantidade) {
   printf("Aluno editado com sucesso!\n");
 }
 
+// Função para remover um aluno
+void removerAluno(Aluno *alunos, int *quantidade) {
+  int matricula, indice;
+
+  printf("Digite a matrícula do aluno para remover: ");
+  if (scanf("%d", &matricula) != 1) {
+    printf("A matrícula deve conter apenas números.\n");
+    while (getchar() != '\n')
+      ;
+    return;
+  }
+
+  indice = buscarIndiceAluno(alunos, *quantidade, matricula);
+  if (indice == -1) {
+    printf("Aluno não encontrado.\n");
+    return;
+  }
+
+  for (int i = indice; i < *quantidade - 1; i++) {
+    alunos[i] = alunos[i + 1];
+  }
+
+  (*quantidade)--;
+  printf("Aluno removido com sucesso!\n");
+}
+
+// Função para calcular a média do aluno
+void calcularMedia(Aluno *aluno) {
+  float soma = 0;
+  for (int i = 0; i < 3; i++) {
+    soma += aluno->notas[i];
+  }
+  aluno->media = soma / 3;
+}
