@@ -215,7 +215,7 @@ void editarAluno(Aluno *alunos, int quantidade) {
   printf("Aluno editado com sucesso!\n");
 }
 
-// Função para remover um aluno
+// Função para remover um alun
 void removerAluno(Aluno *alunos, int *quantidade) {
   int matricula, indice;
 
