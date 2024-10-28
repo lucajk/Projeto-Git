@@ -250,3 +250,20 @@ void calcularMedia(Aluno *aluno) {
   }
   aluno->media = soma / 3;
 }
+
+// Função para listar todos os alunos
+void listarAlunos(Aluno *alunos, int quantidade) {
+  if (quantidade == 0) {
+    printf("Nenhum aluno cadastrado.\n");
+    return;
+  }
+
+  for (int i = 0; i < quantidade; i++) {
+    printf("Aluno: %s\n", alunos[i].nome);
+    printf("Matrícula: %d\n", alunos[i].matricula);
+    printf("Notas: %.2f, %.2f, %.2f\n", alunos[i].notas[0], alunos[i].notas[1],
+           alunos[i].notas[2]);
+    printf("Média: %.2f\n", alunos[i].media);
+    printf("Faltas: %d\n\n", alunos[i].faltas);
+  }
+}
