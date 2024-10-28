@@ -308,3 +308,47 @@ void listarAprovadosReprovados(Aluno *alunos, int quantidade) {
   }
 }
 
+// Função para salvar dados dos alunos em arquivo de texto organizado
+void salvarDados(Aluno *alunos, int quantidade) {
+  FILE *arquivo = fopen(ARQUIVO, "w");
+  if (arquivo == NULL) {
+    printf("Erro ao abrir o arquivo para salvar os dados.\n");
+    return;
+  }
+
+  for (int i = 0; i < quantidade; i++) {
+    fprintf(arquivo, "Nome: %s\n", alunos[i].nome);
+    fprintf(arquivo, "Matrícula: %d\n", alunos[i].matricula);
+    fprintf(arquivo, "Notas: %.2f, %.2f, %.2f\n", alunos[i].notas[0],
+            alunos[i].notas[1], alunos[i].notas[2]);
+    fprintf(arquivo, "Média: %.2f\n", alunos[i].media);
+    fprintf(arquivo, "Faltas: %d\n", alunos[i].faltas);
+    fprintf(arquivo, "-------------------------\n");
+  }
+
+  fclose(arquivo);
+  printf("Dados salvos no arquivo texto com sucesso.\n");
+}
+
+// Função para carregar dados dos alunos do arquivo de texto
+void carregarDados(Aluno *alunos, int *quantidade) {
+  FILE *arquivo = fopen(ARQUIVO, "r");
+  if (arquivo == NULL) {
+    printf("Nenhum arquivo de dados encontrado. Criando novo arquivo...\n");
+    return;
+  }
+
+  *quantidade = 0;
+  while (fscanf(arquivo,
+                " Nome: %[^\n]\n Matrícula: %d\n Notas: %f, %f, %f\n Média: "
+                "%f\n Faltas: %d\n -------------------------\n",
+                alunos[*quantidade].nome, &alunos[*quantidade].matricula,
+                &alunos[*quantidade].notas[0], &alunos[*quantidade].notas[1],
+                &alunos[*quantidade].notas[2], &alunos[*quantidade].media,
+                &alunos[*quantidade].faltas) == 7) {
+    (*quantidade)++;
+  }
+
+  fclose(arquivo);
+  printf("Dados carregados do arquivo texto com sucesso!\n");
+}
