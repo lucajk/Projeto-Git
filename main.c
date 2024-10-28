@@ -216,6 +216,7 @@ void editarAluno(Aluno *alunos, int quantidade) {
 }
 
 // Função para remover um aluno
+
 void removerAluno(Aluno *alunos, int *quantidade) {
   int matricula, indice;
 
