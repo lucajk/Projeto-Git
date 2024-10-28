@@ -251,7 +251,6 @@ void calcularMedia(Aluno *aluno) {
   aluno->media = soma / 3;
 }
 
-
 // Função para listar todos os alunos
 void listarAlunos(Aluno *alunos, int quantidade) {
   if (quantidade == 0) {
