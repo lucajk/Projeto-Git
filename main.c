@@ -93,3 +93,70 @@ int main() {
   return 0;
 }
 
+void adicionarAluno(Aluno *alunos, int *quantidade) {
+    if (*quantidade >= MAX_ALUNOS) {
+        printf("Limite de alunos atingido!\n");
+        return;
+    }
+
+    Aluno novoAluno;
+    char notaStr[10];
+    char matriculaStr[10]; // Nova variável para armazenar a matrícula como string
+
+    // Alteração: leitura da matrícula como string
+    do {
+        printf("Matrícula do aluno: ");
+        scanf("%s", matriculaStr);
+
+        if (validarMatricula(matriculaStr)) {
+            novoAluno.matricula = atoi(matriculaStr); // Converte a string para inteiro
+            if (buscarIndiceAluno(alunos, *quantidade, novoAluno.matricula) != -1) {
+                printf("Matrícula já existente! Aluno não foi adicionado.\n");
+                return;
+            }
+            break; // Matrícula válida e única, saímos do loop
+        } else {
+            printf("Matrícula inválida! Deve conter apenas números.\n");
+        }
+    } while (1);
+
+    printf("Nome do aluno: ");
+    scanf(" %[^\n]", novoAluno.nome);
+
+    for (int i = 0; i < 3; i++) {
+        int notaValida = 0;
+        do {
+            printf("Nota %d: ", i + 1);
+            scanf("%s", notaStr);
+
+            if (validarNotaInput(notaStr)) {
+                novoAluno.notas[i] = atof(notaStr);
+                if (validarNota(novoAluno.notas[i])) {
+                    notaValida = 1;
+                } else {
+                    printf("Nota inválida! Digite uma nota entre %.1f e %.1f.\n",
+                           NOTA_MINIMA, NOTA_MAXIMA);
+                }
+            } else {
+                printf("A nota deve conter apenas números. Tente novamente.\n");
+            }
+        } while (!notaValida);
+    }
+
+    printf("Quantidade de faltas: ");
+    scanf("%d", &novoAluno.faltas);
+
+    calcularMedia(&novoAluno);
+    alunos[*quantidade] = novoAluno;
+    (*quantidade)++;
+    printf("Aluno adicionado com sucesso!\n");
+}
+
+int validarMatricula(char *input) {
+  for (int i = 0; input[i] != '\0'; i++) {
+      if (!isdigit(input[i])) {
+          return 0; // Se não for um dígito, retorna 0 (falso)
+      }
+  }
+  return 1; // Se todos os caracteres forem dígitos, retorna 1 (verdadeiro)
+}
