@@ -92,7 +92,6 @@ int main() {
 
   return 0;
 }
-
 void adicionarAluno(Aluno *alunos, int *quantidade) {
   if (*quantidade >= MAX_ALUNOS) {
     printf("Limite de alunos atingido!\n");
